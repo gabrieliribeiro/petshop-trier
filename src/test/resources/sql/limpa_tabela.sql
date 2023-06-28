@@ -1,0 +1,1 @@
+delete from funcionario where id_funcionario > 0;
