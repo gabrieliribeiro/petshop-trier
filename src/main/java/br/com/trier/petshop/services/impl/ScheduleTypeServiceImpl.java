@@ -25,9 +25,9 @@ public class ScheduleTypeServiceImpl implements ScheduleTypeService{
 
 		for (ScheduleType existingType : existingTypes) {
 			if (existingType != null && existingType.getId() != obj.getId()) {
-		        throw new IntegrityViolation("Tipo de agendamento com a descrição '%s' já existe."
-		                .formatted(obj.getDescription()));
-		    }
+				throw new IntegrityViolation(
+						"Tipo de agendamento com a descrição '%s' já existe.".formatted(obj.getDescription()));
+			}
 		}
 		if (obj.getDescription().equalsIgnoreCase("médico") && obj.getDescription() == null) {
 			throw new IllegalArgumentException("O motivo deve ser informado para o tipo de atendimento médico.");
