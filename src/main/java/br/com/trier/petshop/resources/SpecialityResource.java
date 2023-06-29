@@ -1,7 +1,6 @@
 package br.com.trier.petshop.resources;
 
 import br.com.trier.petshop.domain.Speciality;
-import br.com.trier.petshop.domain.Species;
 import br.com.trier.petshop.services.SpecialityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

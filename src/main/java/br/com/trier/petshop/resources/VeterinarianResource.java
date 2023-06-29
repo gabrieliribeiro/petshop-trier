@@ -41,8 +41,8 @@ public class VeterinarianResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<Veterinarian> findById(@PathVariable Integer id){
-        Veterinarian race = service.findById(id);
-        return race!=null ? ResponseEntity.ok(race) : ResponseEntity.badRequest().build();
+        Veterinarian veterinarian = service.findById(id);
+        return veterinarian!=null ? ResponseEntity.ok(veterinarian) : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/nome/{name}")

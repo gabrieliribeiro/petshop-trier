@@ -52,7 +52,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
     @Override
     public Veterinarian findById(Integer id) {
         Optional<Veterinarian> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFound("Nenhuma espécie encontrada com esse id %s".formatted(id)));
+        return obj.orElseThrow(() -> new ObjectNotFound("Nenhum veterinário encontrado com esse id %s".formatted(id)));
     }
 
     @Override

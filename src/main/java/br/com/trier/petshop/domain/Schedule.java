@@ -1,8 +1,6 @@
 package br.com.trier.petshop.domain;
 
-import java.time.LocalDate;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.time.ZonedDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,37 +18,24 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Entity(name = "pet")
-public class Pet {
+@Entity(name = "agenda")
+public class Schedule {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_pet")
+	@Column(name = "id_agenda")
 	@Setter
 	private Integer id;
 	
-	@Column(name = "nome_pet")
-	private String name;
-
-	@Column(name = "data_cliente")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate birthdate;
-
-	@Column(name = "porte_raca")
-	private String petSize;
-
-	@Column(name = "pelagem_raca")
-	private String petFurSize;
-
-	@Column(name = "cor_pelagem_raca")
-	private String petFurColor;
-
-	@ManyToOne
-	private PetOwner petOwner;
+	@Column(name = "data_agendada")
+	private ZonedDateTime date;
+	
+	@Column(name = "motivo_agendamento")
+	private String reason;
 	
 	@ManyToOne
-	private Species species;
-
+	private ScheduleType scheduleType;
+	
 	@ManyToOne
-	private Race race;
+	private Speciality speciality;
 }

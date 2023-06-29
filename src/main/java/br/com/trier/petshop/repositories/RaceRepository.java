@@ -1,6 +1,5 @@
 package br.com.trier.petshop.repositories;
 
-import br.com.trier.petshop.domain.PetOwner;
 import br.com.trier.petshop.domain.Race;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

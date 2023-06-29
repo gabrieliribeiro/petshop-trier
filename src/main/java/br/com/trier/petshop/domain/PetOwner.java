@@ -3,7 +3,9 @@ package br.com.trier.petshop.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @AllArgsConstructor
@@ -25,7 +27,8 @@ public class PetOwner{
 	private String rg;
 	
 	@Column(name = "data_cliente")
-	private ZonedDateTime birthdate;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private LocalDate birthdate;
 	
 	@Column(name = "nome_cliente")
 	private String name;

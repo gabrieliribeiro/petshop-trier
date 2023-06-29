@@ -1,6 +1,5 @@
 package br.com.trier.petshop.resources;
 
-import br.com.trier.petshop.domain.Race;
 import br.com.trier.petshop.domain.Species;
 import br.com.trier.petshop.services.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;
