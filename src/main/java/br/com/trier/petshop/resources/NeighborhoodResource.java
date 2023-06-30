@@ -16,8 +16,8 @@ public class NeighborhoodResource {
 	private NeighborhoodService service;
 	
 	@PostMapping
-	public ResponseEntity<Neighborhood> insert(@RequestBody Neighborhood city){
-		Neighborhood newNeighboorhood = service.save(city);
+	public ResponseEntity<Neighborhood> insert(@RequestBody Neighborhood neighborhood){
+		Neighborhood newNeighboorhood = service.save(neighborhood);
 		return newNeighboorhood != null ? ResponseEntity.ok(newNeighboorhood) : ResponseEntity.badRequest().build();
 	}
 	
@@ -42,8 +42,8 @@ public class NeighborhoodResource {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Neighborhood> findById(@PathVariable Integer id){
-		Neighborhood city = service.findById(id);
-		return city!=null ? ResponseEntity.ok(city) : ResponseEntity.badRequest().build();
+		Neighborhood neighborhood = service.findById(id);
+		return neighborhood!=null ? ResponseEntity.ok(neighborhood) : ResponseEntity.badRequest().build();
 	}
 	
 	@GetMapping("/name/{description}")

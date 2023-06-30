@@ -1,9 +1,7 @@
 package br.com.trier.petshop.domain;
 
-import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import br.com.trier.petshop.domain.dto.MedicalRecordAtendimentoDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,37 +18,29 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Entity(name = "pet")
-public class Pet {
+@Entity(name = "prontuario_atendimento")
+public class MedicalRecordAtendimento {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_pet")
+	@Column(name = "id_prontuario_atendimento")
 	@Setter
 	private Integer id;
 	
-	@Column(name = "nome_pet")
-	private String name;
-
-	@Column(name = "data_aniversario")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate birthdate;
-
-	@Column(name = "porte_raca")
-	private String petSize;
-
-	@Column(name = "pelagem_raca")
-	private String petFurSize;
-
-	@Column(name = "cor_pelagem_raca")
-	private String petFurColor;
-
 	@ManyToOne
-	private PetOwner petOwner;
+	private Schedule atendimento;
+	
 	
 	@ManyToOne
-	private Species species;
+	private MedicalRecord prontuario;
 
-	@ManyToOne
-	private Race race;
+	public MedicalRecordAtendimentoDTO toDTO() {
+		return new MedicalRecordAtendimentoDTO(id,atendimento.getId(), prontuario.getId());
+	}
+	
+	public MedicalRecordAtendimento(MedicalRecordAtendimentoDTO dto, Schedule atendimento, MedicalRecord prontuario) {
+		this(dto.getId(), atendimento, prontuario);
+	}
+	
 }

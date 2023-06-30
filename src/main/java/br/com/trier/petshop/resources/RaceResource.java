@@ -50,5 +50,4 @@ public class RaceResource {
     public ResponseEntity<List<Race>> findByRaceName(@PathVariable String raceName){
         return ResponseEntity.ok(service.findByRaceName(raceName));
     }
-
 }

@@ -20,6 +20,9 @@ public class RaceServiceImpl implements RaceService {
         if (obj == null) {
             throw new IntegrityViolation("A raça não pode ser nula!");
         }
+        if (obj.getRaceName()== null) {
+            throw new IntegrityViolation("A descrição da raça não pode ser nula!");
+        }
     }
 
     @Override
@@ -52,11 +55,11 @@ public class RaceServiceImpl implements RaceService {
 
     @Override
     public List<Race> findByRaceNameStartingWithIgnoreCase(String raceName) {
-        return repository.findByRaceName(raceName);
+        return repository.findByRaceNameStartingWithIgnoreCase(raceName);
     }
     @Override
     public List<Race> findByRaceNameContainsIgnoreCase(String raceName) {
-        return repository.findByRaceName(raceName);
+        return repository.findByRaceNameContainsIgnoreCase(raceName);
     }
 
 

@@ -1,0 +1,2 @@
+insert into endereco(id_endereco, cep_endereco, logradouro_endereco, neighborhood_id_bairro, city_id_cidade)values(1, '88705-090', 'Avenida Rodovalho', 1,1);
+insert into endereco(id_endereco, cep_endereco, logradouro_endereco, neighborhood_id_bairro, city_id_cidade)values(2, '88780-000', 'Rua Amazonas', 3,2);

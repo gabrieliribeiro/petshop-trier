@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.trier.petshop.domain.ScheduleType;
+import br.com.trier.petshop.domain.dto.ScheduleTypeDTO;
 import br.com.trier.petshop.services.ScheduleTypeService;
 
 @RestController
@@ -24,16 +25,17 @@ public class ScheduleTypeResource {
 	private ScheduleTypeService service;
 	
 	@PostMapping
-    public ResponseEntity<ScheduleType> insert(@RequestBody ScheduleType scheduleType){
-		ScheduleType newScheduleType = service.save(scheduleType);
-        return newScheduleType != null ? ResponseEntity.ok(newScheduleType) : ResponseEntity.badRequest().build();
+    public ResponseEntity<ScheduleTypeDTO> insert(@RequestBody ScheduleTypeDTO scheduleType){
+		ScheduleType newScheduleType = service.save(new ScheduleType(scheduleType));
+        return newScheduleType != null ? ResponseEntity.ok(newScheduleType.toDto()) : ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ScheduleType> update(@PathVariable Integer id ,@RequestBody ScheduleType scheduleType){
+    public ResponseEntity<ScheduleTypeDTO> update(@PathVariable Integer id ,@RequestBody ScheduleTypeDTO scheduleTypeDTO){
+    	ScheduleType scheduleType = new ScheduleType(scheduleTypeDTO);
     	scheduleType.setId(id);
     	scheduleType = service.update(scheduleType);
-        return scheduleType != null ? ResponseEntity.ok(scheduleType) : ResponseEntity.badRequest().build();
+        return scheduleType != null ? ResponseEntity.ok(scheduleType.toDto()) : ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/{id}")
@@ -43,29 +45,36 @@ public class ScheduleTypeResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<ScheduleType>>listAll(){
-        List<ScheduleType> lista = service.listAll();
-        return lista.size()>0 ? ResponseEntity.ok(lista) : ResponseEntity.badRequest().build();
+    public ResponseEntity<List<ScheduleTypeDTO>>listAll(){
+    	return ResponseEntity.ok(service.listAll().stream()
+				.map((scheduleType) -> scheduleType.toDto())
+				.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ScheduleType> findById(@PathVariable Integer id){
+    public ResponseEntity<ScheduleTypeDTO> findById(@PathVariable Integer id){
     	ScheduleType scheduleType = service.findById(id);
-        return scheduleType!=null ? ResponseEntity.ok(scheduleType) : ResponseEntity.badRequest().build();
+        return scheduleType!=null ? ResponseEntity.ok(scheduleType.toDto()) : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/descricao/{description}")
-    public ResponseEntity<List<ScheduleType>> findByDescription(@PathVariable String description){
-        return ResponseEntity.ok(service.findByDescription(description));
+    public ResponseEntity<List<ScheduleTypeDTO>> findByDescription(@PathVariable String description){
+    	return ResponseEntity.ok(service.findByDescription(description).stream()
+				.map((scheduleType) -> scheduleType.toDto())
+				.toList());
     }
 
     @GetMapping("/descricao-inicia/{description}")
-    public ResponseEntity<List<ScheduleType>> findByDescriptionStartingWithIgnoreCase(@PathVariable String description){
-        return ResponseEntity.ok(service.findByDescriptionStartingWithIgnoreCase(description));
+    public ResponseEntity<List<ScheduleTypeDTO>> findByDescriptionStartingWithIgnoreCase(@PathVariable String description){
+    	return ResponseEntity.ok(service.findByDescriptionStartingWithIgnoreCase(description).stream()
+				.map((scheduleType) -> scheduleType.toDto())
+				.toList());
     }
     
     @GetMapping("/protuario/{requerMedicalRecord}")
-    public ResponseEntity<List<ScheduleType>> findByRequerMedicalRecord(@PathVariable Boolean requerMedicalRecord){
-        return ResponseEntity.ok(service.findByRequerMedicalRecord(requerMedicalRecord));
+    public ResponseEntity<List<ScheduleTypeDTO>> findByRequerMedicalRecord(@PathVariable Boolean requerMedicalRecord){
+    	return ResponseEntity.ok(service.findByRequerMedicalRecord(requerMedicalRecord).stream()
+				.map((scheduleType) -> scheduleType.toDto())
+				.toList());
     }
 }
